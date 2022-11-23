@@ -10,99 +10,46 @@ using Debug = UnityEngine.Debug;
 
 public class GooglePlayGameControl : MonoBehaviour
 {
-    [SerializeField] string idTest;
-    static PlayGamesPlatform platform;
-    bool isNetworkAvailable => Application.internetReachability != NetworkReachability.NotReachable;
-
-    public void Sign()
+    public void SocialLogin()
     {
-        InitPlayGamesPlatform();
-    }
-
-    void AutoLogin()
-    {
-        AutoLoginGPS();
-    }
-
-    void InitPlayGamesPlatform()
-    {
-        if (isNetworkAvailable)
-        {
-            PlayGamesClientConfiguration config = new PlayGamesClientConfiguration.Builder().EnableSavedGames().Build();
-            PlayGamesPlatform.DebugLogEnabled = true;
-            PlayGamesPlatform.InitializeInstance(config);
-            platform = PlayGamesPlatform.Activate();
-            DOVirtual.DelayedCall(0.5f, AutoLogin);
-        }
-    }
-
-    void AutoLoginGPS()
-    {
-        if (isNetworkAvailable)
-        {
-            if (platform != null)
+        Social.localUser.Authenticate(success => {
+            if (success)
             {
-                platform.Authenticate(SignInInteractivity.CanPromptAlways, (result =>
-                {
-                    Debug.Log($"result: {result.ToString()}");
-                    if (result == SignInStatus.Success)
-                    {
-                        Debug.Log("Login success");
-                        ActionOnSignIn();
-                    }
-                    else
-                    {
-                        //TODO: login fail here
-                    }
-                }));
+                Debug.Log("Authentication successful");
+                string userInfo = "Username: " + Social.localUser.userName +
+                                  "\nUser ID: " + Social.localUser.id +
+                                  "\nIsUnderage: " + Social.localUser.underage +
+                                  "\nToken ID: " + Social.localUser.id;
+                Debug.Log(userInfo);
             }
             else
-            {
-                Debug.Log("Refesh InitPlayGamesPlatform");
-                InitPlayGamesPlatform();
-            }
+                Debug.Log("Authentication failed");
+        });
+
+    }
+
+    public void Login()
+    {
+        PlayGamesPlatform.Instance.Authenticate(ProcessAuthentication);
+    }
+
+    internal void ProcessAuthentication(SignInStatus status)
+    {
+        Debug.Log("status: " + status);
+        if (status == SignInStatus.Success)
+        {
+            // Continue with Play Games Services
         }
         else
         {
-            Debug.Log($"Request login here because fail internet access");
-            //TODO: Request login here because fail internet access
+            // Disable your integration with Play Games Services or show a login button
+            // to ask users to sign-in. Clicking it should call
+            PlayGamesPlatform.Instance.ManuallyAuthenticate(ProcessAuthentication);
         }
     }
 
-    public void Logout(Action onCompleted = null)
+    public void ShowToken()
     {
-        platform.SignOut();
-        onCompleted?.Invoke();
-    }
-
-    void LoginGuest()
-    {
-        ActionOnSignIn();
-    }
-
-    void ActionOnSignIn()
-    {
-        var id = GetUserId();
-        Debug.Log("id: " + id);
-    }
-
-    public string GetUserName()
-    {
-        return platform.localUser.authenticated ? platform.localUser.userName : string.Empty;
-    }
-
-    public string GetUserEmail()
-    {
-        return ((PlayGamesLocalUser)platform.localUser).Email;
-    }
-
-    public string GetUserId()
-    {
-        return platform.localUser.authenticated ? platform.localUser.id : SystemInfo.deviceUniqueIdentifier;
-    }
-
-    string GetUidLocal()
-    {
-        return string.Empty;
+        Debug.Log("PlayGamesPlatform.Instance.localUser.id: " + PlayGamesPlatform.Instance.localUser.id);
     }
 }

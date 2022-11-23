@@ -219,7 +219,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b25b62becc710d499bb8d66037861fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  idTest: this  is id test
 --- !u!4 &246523397
 Transform:
   m_ObjectHideFlags: 0
@@ -293,7 +292,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Login new
+  m_text: 'Login social
 
 '
   m_isRightToLeft: 0
@@ -823,7 +822,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 246523396}
         m_TargetAssemblyTypeName: GooglePlayGameControl, Assembly-CSharp
-        m_MethodName: Sign
+        m_MethodName: SocialLogin
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -955,9 +954,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1658836396}
-        m_TargetAssemblyTypeName: LoginGooglePlay, Assembly-CSharp
-        m_MethodName: GetToken
+      - m_Target: {fileID: 246523396}
+        m_TargetAssemblyTypeName: GooglePlayGameControl, Assembly-CSharp
+        m_MethodName: ShowToken
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1089,8 +1088,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1658836396}
-        m_TargetAssemblyTypeName: LoginGooglePlay, Assembly-CSharp
+      - m_Target: {fileID: 246523396}
+        m_TargetAssemblyTypeName: GooglePlayGameControl, Assembly-CSharp
         m_MethodName: Login
         m_Mode: 1
         m_Arguments:
@@ -1151,7 +1150,6 @@ GameObject:
   - component: {fileID: 1658836399}
   - component: {fileID: 1658836398}
   - component: {fileID: 1658836397}
-  - component: {fileID: 1658836396}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1159,18 +1157,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1658836396
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1658836395}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f1bd0d3c0df3094b8f0960feffc5ddb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1658836397
 MonoBehaviour:
   m_ObjectHideFlags: 0

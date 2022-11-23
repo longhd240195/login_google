@@ -3,7 +3,7 @@
     "m_SelectedPackage": {
         "deviceId": "192.168.16.155:5555",
         "name": "io.nekoglobal.nekoverse.battle.v2",
-        "processId": 8533,
+        "processId": 1626,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -24,6 +24,12 @@
             "deviceId": "192.168.16.155:5555",
             "name": "io.nekoglobal.nekoverse.battle.v2",
             "processId": 8533,
+            "exited": true
+        },
+        {
+            "deviceId": "192.168.16.155:5555",
+            "name": "io.nekoglobal.nekoverse.battle.v2",
+            "processId": 1626,
             "exited": false
         }
     ],
