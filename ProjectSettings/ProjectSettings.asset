@@ -812,11 +812,11 @@ PlayerSettings:
     m_VersionName: 
   apiCompatibilityLevel: 6
   activeInputHandler: 0
-  cloudProjectId: 
+  cloudProjectId: 866539f4-fff5-472c-9c1c-717a89179a96
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: 
-  organizationId: 
+  projectName: GoogleLogin
+  organizationId: longhd240195
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   playerDataPath: 

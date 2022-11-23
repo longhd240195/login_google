@@ -1,25 +1,13 @@
 {
     "m_SelectedDeviceId": "192.168.16.155:5555",
     "m_SelectedPackage": {
-        "deviceId": "",
-        "name": "",
-        "processId": 0,
+        "deviceId": "192.168.16.155:5555",
+        "name": "io.nekoglobal.nekoverse.battle.v2",
+        "processId": 26535,
         "exited": false
     },
     "m_SelectedPriority": 0,
     "m_KnownPackagesForSerialization": [
-        {
-            "deviceId": "192.168.16.155:5555",
-            "name": "io.nekoglobal.nekoverse.battle.v2",
-            "processId": 6821,
-            "exited": true
-        },
-        {
-            "deviceId": "192.168.16.155:5555",
-            "name": "io.nekoglobal.nekoverse.battle.v2",
-            "processId": 8533,
-            "exited": true
-        },
         {
             "deviceId": "192.168.16.155:5555",
             "name": "io.nekoglobal.nekoverse.battle.v2",
@@ -36,12 +24,18 @@
             "deviceId": "192.168.16.155:5555",
             "name": "com.google.android.gms.ui",
             "processId": 14710,
-            "exited": false
+            "exited": true
         },
         {
             "deviceId": "192.168.16.155:5555",
             "name": "io.nekoglobal.nekoverse.battle.v2",
             "processId": 14553,
+            "exited": true
+        },
+        {
+            "deviceId": "192.168.16.155:5555",
+            "name": "io.nekoglobal.nekoverse.battle.v2",
+            "processId": 26535,
             "exited": false
         }
     ],
