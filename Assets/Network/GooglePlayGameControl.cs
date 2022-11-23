@@ -1,10 +1,7 @@
 ﻿using GooglePlayGames;
 using GooglePlayGames.BasicApi;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
-using DG.Tweening;
+using UnityEngine.SocialPlatforms;
+using System.Threading.Tasks;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 
@@ -30,6 +27,8 @@ public class GooglePlayGameControl : MonoBehaviour
 
     public void Login()
     {
+        PlayGamesPlatform.Activate();
+
         PlayGamesPlatform.Instance.Authenticate(ProcessAuthentication);
     }
 
