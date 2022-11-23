@@ -3,7 +3,7 @@
     "m_SelectedPackage": {
         "deviceId": "192.168.16.155:5555",
         "name": "io.nekoglobal.nekoverse.battle.v2",
-        "processId": 12841,
+        "processId": 8533,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -12,6 +12,18 @@
             "deviceId": "192.168.16.155:5555",
             "name": "io.nekoglobal.nekoverse.battle.v2",
             "processId": 12841,
+            "exited": true
+        },
+        {
+            "deviceId": "192.168.16.155:5555",
+            "name": "io.nekoglobal.nekoverse.battle.v2",
+            "processId": 6821,
+            "exited": true
+        },
+        {
+            "deviceId": "192.168.16.155:5555",
+            "name": "io.nekoglobal.nekoverse.battle.v2",
+            "processId": 8533,
             "exited": false
         }
     ],
@@ -23,7 +35,7 @@
             },
             {
                 "m_Name": "No Filter",
-                "m_Selected": true
+                "m_Selected": false
             },
             {
                 "m_Name": "",
@@ -39,7 +51,7 @@
             },
             {
                 "m_Name": "Unity",
-                "m_Selected": false
+                "m_Selected": true
             },
             {
                 "m_Name": "CRASH",
