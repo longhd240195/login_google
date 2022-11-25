@@ -1,6 +1,8 @@
 ﻿#if UNITY_ANDROID
 using GooglePlayGames;
 using GooglePlayGames.BasicApi;
+
+using Mono.Cecil.Cil;
 #endif
 
 #if UNITY_IOS
@@ -70,6 +72,8 @@ public class GooglePlayGameControl : MonoBehaviour
             {
                 Log("SignInStatus: " + success);
                 Log("PlayGamesPlatform: " + PlayGamesPlatform.Instance.IsAuthenticated());
+                Log("PlayGamesPlatform: " + PlayGamesPlatform.Instance.GetUserDisplayName());
+                Log("PlayGamesPlatform: " + PlayGamesPlatform.Instance.GetUserId());
                 if (success == SignInStatus.Success)
                 {
                     Log("Login with Google Play games successful.");
@@ -88,6 +92,7 @@ public class GooglePlayGameControl : MonoBehaviour
                     Log("Login Unsuccessful");
                 }
             });
+
 #endif
 
 #if UNITY_IOS
@@ -128,6 +133,21 @@ public class GooglePlayGameControl : MonoBehaviour
         );
 #endif
 
+    }
+
+    public void TryGetToken()
+    {
+#if UNITY_ANDROID
+        Log("Try get token...");
+        
+        PlayGamesPlatform.Instance.RequestServerSideAccess(true, code =>
+        {
+            Log("Authorization code: " + code);
+            Token = code;
+            Log("Token: " + Token);
+            // This token serves as an example to be used for SignInWithGooglePlayGames
+        });
+#endif
     }
 
     public void Logout()
