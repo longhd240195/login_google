@@ -35,12 +35,12 @@ public class GooglePlayGameControl : MonoBehaviour
     public void Initialize()
     {
 #if UNITY_ANDROID
-        //var config = new PlayGamesClientConfiguration.Builder()
-        //    .RequestIdToken()
-        //    .Build();
+        var config = new PlayGamesClientConfiguration.Builder()
+            .RequestIdToken()
+            .Build();
 
-        //PlayGamesPlatform.InitializeInstance(config);
-        //PlayGamesPlatform.DebugLogEnabled = true;
+        PlayGamesPlatform.InitializeInstance(config);
+        PlayGamesPlatform.DebugLogEnabled = true;
         PlayGamesPlatform.Activate();
 #endif
 
@@ -53,45 +53,48 @@ public class GooglePlayGameControl : MonoBehaviour
     public void LoginGooglePlayGames()
     {
 #if UNITY_ANDROID
-        //Social.localUser.Authenticate(success =>
-        //{
-        //    Log("Result login: " + success);
-        //    if (success)
-        //    {
-        //        Call Unity Authentication SDK to sign in or link with Google.
-        //        Token = ((PlayGamesLocalUser)Social.localUser).GetIdToken();
-        //        Log("Login with Google done. IdToken: " + ((PlayGamesLocalUser)Social.localUser).GetIdToken());
-        //    }
-        //    else
-        //    {
-        //        Log("Unsuccessful login");
-        //    }
-        //});
-
-        PlayGamesPlatform.Instance.ManuallyAuthenticate((success) =>
+        Social.localUser.Authenticate(success =>
+        {
+            Log("Result login: " + success);
+            if (success)
             {
-                Log("SignInStatus: " + success);
+                //Call Unity Authentication SDK to sign in or link with Google.
                 Log("PlayGamesPlatform: " + PlayGamesPlatform.Instance.IsAuthenticated());
                 Log("PlayGamesPlatform: " + PlayGamesPlatform.Instance.GetUserDisplayName());
                 Log("PlayGamesPlatform: " + PlayGamesPlatform.Instance.GetUserId());
-                if (success == SignInStatus.Success)
-                {
-                    Log("Login with Google Play games successful.");
+                Token = ((PlayGamesLocalUser)Social.localUser).GetIdToken();
+                Log("Login with Google done. IdToken: " + ((PlayGamesLocalUser)Social.localUser).GetIdToken());
+            }
+            else
+            {
+                Log("Unsuccessful login");
+            }
+        });
 
-                    PlayGamesPlatform.Instance.RequestServerSideAccess(true, code =>
-                    {
-                        Log("Authorization code: " + code);
-                        Token = code;
-                        Log("Token: " + Token);
-                        // This token serves as an example to be used for SignInWithGooglePlayGames
-                    });
-                }
-                else
-                {
-                    LogError("Failed to retrieve Google play games authorization code");
-                    Log("Login Unsuccessful");
-                }
-            });
+        //PlayGamesPlatform.Instance.ManuallyAuthenticate((success) =>
+        //    {
+        //        Log("SignInStatus: " + success);
+        //        Log("PlayGamesPlatform: " + PlayGamesPlatform.Instance.IsAuthenticated());
+        //        Log("PlayGamesPlatform: " + PlayGamesPlatform.Instance.GetUserDisplayName());
+        //        Log("PlayGamesPlatform: " + PlayGamesPlatform.Instance.GetUserId());
+        //        if (success == SignInStatus.Success)
+        //        {
+        //            Log("Login with Google Play games successful.");
+
+        //            PlayGamesPlatform.Instance.RequestServerSideAccess(true, code =>
+        //            {
+        //                Log("Authorization code: " + code);
+        //                Token = code;
+        //                Log("Token: " + Token);
+        //                // This token serves as an example to be used for SignInWithGooglePlayGames
+        //            });
+        //        }
+        //        else
+        //        {
+        //            LogError("Failed to retrieve Google play games authorization code");
+        //            Log("Login Unsuccessful");
+        //        }
+        //    });
 
 #endif
 
@@ -138,15 +141,15 @@ public class GooglePlayGameControl : MonoBehaviour
     public void TryGetToken()
     {
 #if UNITY_ANDROID
-        Log("Try get token...");
+        //Log("Try get token...");
         
-        PlayGamesPlatform.Instance.RequestServerSideAccess(true, code =>
-        {
-            Log("Authorization code: " + code);
-            Token = code;
-            Log("Token: " + Token);
-            // This token serves as an example to be used for SignInWithGooglePlayGames
-        });
+        //PlayGamesPlatform.Instance.RequestServerSideAccess(true, code =>
+        //{
+        //    Log("Authorization code: " + code);
+        //    Token = code;
+        //    Log("Token: " + Token);
+        //    // This token serves as an example to be used for SignInWithGooglePlayGames
+        //});
 #endif
     }
 
