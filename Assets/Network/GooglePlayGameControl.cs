@@ -54,6 +54,7 @@ public class GooglePlayGameControl : MonoBehaviour
 #if UNITY_ANDROID
         Social.localUser.Authenticate(success =>
         {
+            Log("Result login: " + success);
             if (success)
             {
                 // Call Unity Authentication SDK to sign in or link with Google.
