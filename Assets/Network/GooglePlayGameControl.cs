@@ -34,6 +34,12 @@ public class GooglePlayGameControl : MonoBehaviour
     public void Initialize()
     {
 #if UNITY_ANDROID
+        var config = new PlayGamesClientConfiguration.Builder()
+            .RequestIdToken()
+            .Build();
+
+        PlayGamesPlatform.InitializeInstance(config);
+        PlayGamesPlatform.DebugLogEnabled = true;
         PlayGamesPlatform.Activate();
 #endif
 
@@ -46,28 +52,41 @@ public class GooglePlayGameControl : MonoBehaviour
     public void LoginGooglePlayGames()
     {
 #if UNITY_ANDROID
-
-        PlayGamesPlatform.Instance.Authenticate((success) =>
+        Social.localUser.Authenticate(success =>
         {
-            Log("SignInStatus: " + success);
-            if (success == SignInStatus.Success)
+            if (success)
             {
-                Log("Login with Google Play games successful.");
-
-                PlayGamesPlatform.Instance.RequestServerSideAccess(true, code =>
-                {
-                    Log("Authorization code: " + code);
-                    Token = code;
-                    Log("Token: " + Token);
-                    // This token serves as an example to be used for SignInWithGooglePlayGames
-                });
+                // Call Unity Authentication SDK to sign in or link with Google.
+                Token = ((PlayGamesLocalUser)Social.localUser).GetIdToken();
+                Log("Login with Google done. IdToken: " + ((PlayGamesLocalUser)Social.localUser).GetIdToken());
             }
             else
             {
-                LogError("Failed to retrieve Google play games authorization code");
-                Log("Login Unsuccessful");
+                Log("Unsuccessful login");
             }
         });
+
+    //PlayGamesPlatform.Instance.Authenticate((success) =>
+    //    {
+    //        Log("SignInStatus: " + success);
+    //        if (success == SignInStatus.Success)
+    //        {
+    //            Log("Login with Google Play games successful.");
+
+    //            PlayGamesPlatform.Instance.RequestServerSideAccess(true, code =>
+    //            {
+    //                Log("Authorization code: " + code);
+    //                Token = code;
+    //                Log("Token: " + Token);
+    //                // This token serves as an example to be used for SignInWithGooglePlayGames
+    //            });
+    //        }
+    //        else
+    //        {
+    //            LogError("Failed to retrieve Google play games authorization code");
+    //            Log("Login Unsuccessful");
+    //        }
+    //    });
 #endif
 
 #if UNITY_IOS
