@@ -48,6 +48,7 @@ public class GooglePlayGameControl : MonoBehaviour
 
         PlayGamesPlatform.Instance.Authenticate((success) =>
         {
+            Debug.Log("SignInStatus: " + success);
             if (success == SignInStatus.Success)
             {
                 Debug.Log("Login with Google Play games successful.");
