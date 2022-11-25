@@ -98,6 +98,10 @@ public class GooglePlayGameControl : MonoBehaviour
             error =>
             {
                 Debug.Log("Sign-in with Apple error. Message: " + error);
+                Debug.Log("Sign-in with Apple error. Message: " + error.LocalizedDescription);
+                Debug.Log("Sign-in with Apple error. Message: " + error.LocalizedRecoveryOptions);
+                Debug.Log("Sign-in with Apple error. Message: " + error.LocalizedFailureReason);
+                Debug.Log("Sign-in with Apple error. Message: " + error.LocalizedRecoverySuggestion);
                 Debug.LogError("Retrieving Apple Id Token failed.");
             }
         );
