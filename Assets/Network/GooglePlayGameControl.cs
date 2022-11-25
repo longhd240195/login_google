@@ -66,9 +66,10 @@ public class GooglePlayGameControl : MonoBehaviour
         //    }
         //});
 
-        PlayGamesPlatform.Instance.Authenticate((success) =>
+        PlayGamesPlatform.Instance.ManuallyAuthenticate((success) =>
             {
                 Log("SignInStatus: " + success);
+                Log("PlayGamesPlatform: " + PlayGamesPlatform.Instance.IsAuthenticated());
                 if (success == SignInStatus.Success)
                 {
                     Log("Login with Google Play games successful.");
@@ -131,7 +132,8 @@ public class GooglePlayGameControl : MonoBehaviour
 
     public void Logout()
     {
-
+#if UNITY_ANDROID
+#endif
     }
 
     public void Log(string message)
