@@ -1,9 +1,9 @@
 {
-    "m_SelectedDeviceId": "192.168.16.155:5555",
+    "m_SelectedDeviceId": "192.168.16.163:5555",
     "m_SelectedPackage": {
-        "deviceId": "192.168.16.155:5555",
+        "deviceId": "192.168.16.163:5555",
         "name": "io.nekoglobal.nekoverse.battle.v2",
-        "processId": 26535,
+        "processId": 5590,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -36,6 +36,30 @@
             "deviceId": "192.168.16.155:5555",
             "name": "io.nekoglobal.nekoverse.battle.v2",
             "processId": 26535,
+            "exited": false
+        },
+        {
+            "deviceId": "192.168.16.163:5555",
+            "name": "com.android.settings",
+            "processId": 21387,
+            "exited": false
+        },
+        {
+            "deviceId": "192.168.16.163:5555",
+            "name": "io.nekoglobal.nekoverse.battle.v2",
+            "processId": 13014,
+            "exited": true
+        },
+        {
+            "deviceId": "192.168.16.163:5555",
+            "name": "io.nekoglobal.nekoverse.battle.v2",
+            "processId": 30155,
+            "exited": true
+        },
+        {
+            "deviceId": "192.168.16.163:5555",
+            "name": "io.nekoglobal.nekoverse.battle.v2",
+            "processId": 5590,
             "exited": false
         }
     ],

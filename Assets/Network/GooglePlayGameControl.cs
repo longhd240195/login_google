@@ -10,15 +10,16 @@ using AppleAuth.Interfaces;
 using AppleAuth.Native;
 using System.Text;
 
-using UnityEditor.PackageManager;
 #endif
 
+using TMPro;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 
 public class GooglePlayGameControl : MonoBehaviour
 {
     private string Token;
+    [SerializeField]private TextMeshProUGUI tmp;
 
 #if UNITY_IOS
     IAppleAuthManager m_AppleAuthManager;
@@ -48,23 +49,23 @@ public class GooglePlayGameControl : MonoBehaviour
 
         PlayGamesPlatform.Instance.Authenticate((success) =>
         {
-            Debug.Log("SignInStatus: " + success);
+            Log("SignInStatus: " + success);
             if (success == SignInStatus.Success)
             {
-                Debug.Log("Login with Google Play games successful.");
+                Log("Login with Google Play games successful.");
 
                 PlayGamesPlatform.Instance.RequestServerSideAccess(true, code =>
                 {
-                    Debug.Log("Authorization code: " + code);
+                    Log("Authorization code: " + code);
                     Token = code;
-                    Debug.Log("Token: " + Token);
+                    Log("Token: " + Token);
                     // This token serves as an example to be used for SignInWithGooglePlayGames
                 });
             }
             else
             {
-                Debug.LogError("Failed to retrieve Google play games authorization code");
-                Debug.Log("Login Unsuccessful");
+                LogError("Failed to retrieve Google play games authorization code");
+                Log("Login Unsuccessful");
             }
         });
 #endif
@@ -86,32 +87,46 @@ public class GooglePlayGameControl : MonoBehaviour
                 if (appleIDCredential != null)
                 {
                     var idToken = Encoding.UTF8.GetString(appleIDCredential.IdentityToken,0,appleIDCredential.IdentityToken.Length);
-                    Debug.Log("Sign-in with Apple successfully done. IDToken: " + idToken);
+                    Log("Sign-in with Apple successfully done. IDToken: " + idToken);
                     Token = idToken;
                 }
                 else
                 {
-                    Debug.Log("Sign-in with Apple error. Message: appleIDCredential is null");
-                    Debug.LogError("Retrieving Apple Id Token failed.");
+                    Log("Sign-in with Apple error. Message: appleIDCredential is null");
+                    LogError("Retrieving Apple Id Token failed.");
                 }
             },
             error =>
             {
-                Debug.Log("Sign-in with Apple error. Message: " + error);
-                Debug.Log("Sign-in with Apple error. Message: " + error.LocalizedDescription);
-                Debug.Log("Sign-in with Apple error. Message: " + error.LocalizedRecoveryOptions);
-                Debug.Log("Sign-in with Apple error. Message: " + error.LocalizedFailureReason);
-                Debug.Log("Sign-in with Apple error. Message: " + error.LocalizedRecoverySuggestion);
-                Debug.LogError("Retrieving Apple Id Token failed.");
+                Log("Sign-in with Apple error. Message: " + error);
+                Log("Sign-in with Apple error. Message: " + error.LocalizedDescription);
+                Log("Sign-in with Apple error. Message: " + error.LocalizedRecoveryOptions);
+                Log("Sign-in with Apple error. Message: " + error.LocalizedFailureReason);
+                Log("Sign-in with Apple error. Message: " + error.LocalizedRecoverySuggestion);
+                LogError("Retrieving Apple Id Token failed.");
             }
         );
 #endif
 
     }
 
+    public void Log(string message)
+    {
+        tmp.text += "\n" + message;
+    }
+
+    public void LogError(string message)
+    {
+        tmp.text += "\n<color=red>" + message + "</color>";
+    }
+
+    public void MovePage(int diff)
+    {
+        tmp.pageToDisplay += diff;
+    }
 
     public void ShowToken()
     {
-        Debug.Log("Token: " + Token);
+        Log("Token: " + Token);
     }
 }
