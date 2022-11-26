@@ -76,20 +76,18 @@ public class GooglePlayGameControl : MonoBehaviour
         //    }
         //});
 
-        PlayGamesPlatform.Instance.ManuallyAuthenticate((success) =>
+        PlayGamesPlatform.Instance.Authenticate((success) =>
             {
                 Log("Google v11.01");
                 Log("SignInStatus: " + success);
-                Log("PlayGamesPlatform: " + PlayGamesPlatform.Instance.IsAuthenticated());
-                Log("PlayGamesPlatform: " + PlayGamesPlatform.Instance.GetUserDisplayName());
-                Log("PlayGamesPlatform: " + PlayGamesPlatform.Instance.GetUserId());
+                Log("GetUserDisplayName: " + PlayGamesPlatform.Instance.GetUserDisplayName());
+                Log("GetUserId: " + PlayGamesPlatform.Instance.GetUserId());
                 if (success == SignInStatus.Success)
                 {
                     Log("Login with Google Play games successful.");
 
                     PlayGamesPlatform.Instance.RequestServerSideAccess(true, code =>
                     {
-                        Log("Authorization code: " + code);
                         Token = code;
                         Log("Token: " + Token);
                         // This token serves as an example to be used for SignInWithGooglePlayGames
