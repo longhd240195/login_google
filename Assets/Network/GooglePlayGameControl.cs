@@ -38,6 +38,19 @@ public class GooglePlayGameControl : MonoBehaviour
         btnAppleAutoLogin.onClick.AddListener(ApplePlayLogin);
     }
 
+    void Update()
+    {
+#if UNITY_IOS
+        // Updates the AppleAuthManager instance to execute
+        // pending callbacks inside Unity's execution loop
+        if (this.m_AppleAuthManager != null)
+        {
+            this.m_AppleAuthManager.Update();
+        }
+#endif
+
+    }
+
     public void Initialize()
     {
 #if UNITY_ANDROID
@@ -122,12 +135,19 @@ public class GooglePlayGameControl : MonoBehaviour
         // Perform the login
         m_AppleAuthManager.LoginWithAppleId(loginArgs, credential =>
             {
-                var appleIDCredential = credential as IAppleIDCredential;
-                if (appleIDCredential != null)
+                var appleIdCredential = credential as IAppleIDCredential;
+                if (appleIdCredential != null)
                 {
-                    var idToken = Encoding.UTF8.GetString(appleIDCredential.IdentityToken,0,appleIDCredential.IdentityToken.Length);
-                    Log("Sign-in with Apple successfully done. IDToken: " + idToken);
+                    var idToken = Encoding.UTF8.GetString(appleIdCredential.IdentityToken, 0, appleIdCredential.IdentityToken.Length);
                     Token = idToken;
+
+                    Log("Sign-in with Apple successfully done. IdentityToken: " + Token);
+
+                    if (appleIdCredential.AuthorizationCode != null)
+                    {
+                        var authorizationCode = Encoding.UTF8.GetString(appleIdCredential.AuthorizationCode, 0, appleIdCredential.AuthorizationCode.Length);
+                        Log("Sign-in with Apple successfully done. authorizationCode: " + authorizationCode);
+                    }
                 }
                 else
                 {
