@@ -17,14 +17,15 @@ using System.Text;
 
 using System.Threading.Tasks;
 using TMPro;
-using Unity.Services.Authentication;
 
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GooglePlayGameControl : MonoBehaviour
 {
     private string Token;
     [SerializeField]private TextMeshProUGUI tmp;
+    [SerializeField]private Button btnAppleAutoLogin;
 
 #if UNITY_IOS
     IAppleAuthManager m_AppleAuthManager;
@@ -34,6 +35,7 @@ public class GooglePlayGameControl : MonoBehaviour
     void Awake()
     {
         Initialize();
+        btnAppleAutoLogin.onClick.AddListener(ApplePlayLogin);
     }
 
     public void Initialize()
@@ -108,6 +110,7 @@ public class GooglePlayGameControl : MonoBehaviour
 
 #if UNITY_IOS
         // Initialize the Apple Auth Manager
+        Log("normal login apple");
         if (m_AppleAuthManager == null)
         {
             Initialize();
@@ -144,6 +147,42 @@ public class GooglePlayGameControl : MonoBehaviour
         );
 #endif
 
+    }
+
+    private void ApplePlayLogin()
+    {
+#if UNITY_IOS
+        var quickLoginArgs = new AppleAuthQuickLoginArgs();
+        Log("Auto login apple");
+        m_AppleAuthManager.QuickLogin(
+            quickLoginArgs,
+            credential =>
+            {
+                // Received a valid credential!
+                // Try casting to IAppleIDCredential or IPasswordCredential
+
+                // Previous Apple sign in credential
+                var appleIDCredential = credential as IAppleIDCredential;
+                if (appleIDCredential != null)
+                {
+                    var idToken = Encoding.UTF8.GetString(appleIDCredential.IdentityToken, 0, appleIDCredential.IdentityToken.Length);
+                    Log("Sign-in with Apple successfully done. IDToken: " + idToken);
+                    Token = idToken;
+                }
+                else
+                {
+                    Log("Sign-in with Apple error. Message: appleIDCredential is null");
+                    LogError("Retrieving Apple Id Token failed.");
+                }
+                // Saved Keychain credential (read about Keychain Items)
+                var passwordCredential = credential as IPasswordCredential;
+            },
+            error =>
+            {
+                // Quick login failed. The user has never used Sign in With Apple on your app. Go to login screen
+            });
+
+#endif
     }
 
     public void TrySomething()
