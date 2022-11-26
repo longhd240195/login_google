@@ -36,6 +36,7 @@ public class GooglePlayGameControl : MonoBehaviour
     {
 #if UNITY_ANDROID
         var config = new PlayGamesClientConfiguration.Builder()
+            .RequestServerAuthCode(true)
             .RequestIdToken()
             .Build();
 
@@ -43,6 +44,7 @@ public class GooglePlayGameControl : MonoBehaviour
         PlayGamesPlatform.DebugLogEnabled = true;
         PlayGamesPlatform.Activate();
 #endif
+        Log("Initialize");
 
 #if UNITY_IOS
         var deserializer = new PayloadDeserializer();
@@ -55,6 +57,7 @@ public class GooglePlayGameControl : MonoBehaviour
 #if UNITY_ANDROID
         Social.localUser.Authenticate(success =>
         {
+            Log("Google v10.14");
             Log("Result login: " + success);
             if (success)
             {
@@ -64,6 +67,8 @@ public class GooglePlayGameControl : MonoBehaviour
                 Log("PlayGamesPlatform: " + PlayGamesPlatform.Instance.GetUserId());
                 Token = ((PlayGamesLocalUser)Social.localUser).GetIdToken();
                 Log("Login with Google done. IdToken: " + ((PlayGamesLocalUser)Social.localUser).GetIdToken());
+                string authCode = PlayGamesPlatform.Instance.GetServerAuthCode();
+                Log("Auth code: " + authCode);
             }
             else
             {
@@ -73,6 +78,7 @@ public class GooglePlayGameControl : MonoBehaviour
 
         //PlayGamesPlatform.Instance.ManuallyAuthenticate((success) =>
         //    {
+                    //Log("Google v11.01");
         //        Log("SignInStatus: " + success);
         //        Log("PlayGamesPlatform: " + PlayGamesPlatform.Instance.IsAuthenticated());
         //        Log("PlayGamesPlatform: " + PlayGamesPlatform.Instance.GetUserDisplayName());
