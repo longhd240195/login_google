@@ -205,59 +205,6 @@ public class GooglePlayGameControl : MonoBehaviour
 #endif
     }
 
-    public void TrySomething()
-    {
-        Log( "[CloudSave] [Android Auth] Login with Google Play games successful. Authorization code: " + Token);
-        _ = SignInWithGoogleAsync(Token);
-        _ = LinkWithGoogleAsync(Token);
-    }
-
-    async Task SignInWithGoogleAsync(string idToken)
-    {
-#if UNITY_ANDROID
-        Log("Try to signin google");
-        if (AuthenticationService.Instance.IsSignedIn)
-        {
-            try
-            {
-                await AuthenticationService.Instance.LinkWithGoogleAsync(idToken);
-                Log("[CloudSave] [Android Auth] ╰(*°▽°*)╯╰(*°▽°*)╯╰(*°▽°*)╯ Signin to account is successful.");
-            }
-            catch (Exception e)
-            {
-                LogError(e.Message);
-            }
-        }
-        else
-        {
-            LogError("Haven't sign-in");
-        }
-#endif
-    }
-
-    async Task LinkWithGoogleAsync(string idToken)
-    {
-#if UNITY_ANDROID
-        Log("Try to link google");
-        if (AuthenticationService.Instance.IsSignedIn)
-        {
-            try
-            {
-                await AuthenticationService.Instance.LinkWithGoogleAsync(idToken);
-                Log("[CloudSave] [Android Auth] ╰(*°▽°*)╯╰(*°▽°*)╯╰(*°▽°*)╯ Link to account is successful.");
-            }
-            catch (Exception e)
-            {
-                LogError(e.Message);
-            }
-        }
-        else
-        {
-            LogError("Haven't sign-in");
-        }
-#endif
-    }
-
 
     public void TryGetToken()
     {
