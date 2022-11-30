@@ -3,7 +3,7 @@
     "m_SelectedPackage": {
         "deviceId": "192.168.16.161:5555",
         "name": "io.nekoglobal.nekoverse.testing.signin",
-        "processId": 14585,
+        "processId": 23605,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -78,6 +78,12 @@
             "deviceId": "192.168.16.161:5555",
             "name": "io.nekoglobal.nekoverse.testing.signin",
             "processId": 14585,
+            "exited": true
+        },
+        {
+            "deviceId": "192.168.16.161:5555",
+            "name": "io.nekoglobal.nekoverse.testing.signin",
+            "processId": 23605,
             "exited": false
         }
     ],
