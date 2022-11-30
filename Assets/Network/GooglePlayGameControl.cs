@@ -54,13 +54,13 @@ public class GooglePlayGameControl : MonoBehaviour
     public void Initialize()
     {
 #if UNITY_ANDROID
-        //var config = new PlayGamesClientConfiguration.Builder()
-        //    .RequestServerAuthCode(true)
-        //    .RequestIdToken()
-        //    .Build();
+        var config = new PlayGamesClientConfiguration.Builder()
+            .RequestServerAuthCode(true)
+            .RequestIdToken()
+            .Build();
 
-        //PlayGamesPlatform.InitializeInstance(config);
-        //PlayGamesPlatform.DebugLogEnabled = true;
+        PlayGamesPlatform.InitializeInstance(config);
+        PlayGamesPlatform.DebugLogEnabled = true;
         PlayGamesPlatform.Activate();
 #endif
         Log("Initialize");
