@@ -23,7 +23,8 @@ public class GameSignInService
 {
     private static string Token;
     private static bool initialize;
-
+    private string a = "56682896863-fio4e7bb2bmj8cd5gnpntphm5nb5qv2g.apps.googleusercontent.com";
+    private string b = "56682896863-h80ikbpcq55a9cj7s4q2d5lpat160a01.apps.googleusercontent.com";
 #if UNITY_IOS
     IAppleAuthManager m_AppleAuthManager;
 #endif
