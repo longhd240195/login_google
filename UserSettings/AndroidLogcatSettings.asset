@@ -1,9 +1,9 @@
 {
-    "m_SelectedDeviceId": "192.168.16.163:5555",
+    "m_SelectedDeviceId": "192.168.16.161:5555",
     "m_SelectedPackage": {
-        "deviceId": "192.168.16.163:5555",
+        "deviceId": "192.168.16.161:5555",
         "name": "io.nekoglobal.nekoverse.testing.signin",
-        "processId": 7320,
+        "processId": 14585,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -72,6 +72,12 @@
             "deviceId": "192.168.16.163:5555",
             "name": "io.nekoglobal.nekoverse.testing.signin",
             "processId": 7320,
+            "exited": false
+        },
+        {
+            "deviceId": "192.168.16.161:5555",
+            "name": "io.nekoglobal.nekoverse.testing.signin",
+            "processId": 14585,
             "exited": false
         }
     ],

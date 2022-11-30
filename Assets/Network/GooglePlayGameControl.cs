@@ -24,8 +24,8 @@ using UnityEngine.UI;
 public class GooglePlayGameControl : MonoBehaviour
 {
     private string Token;
-    [SerializeField]private TextMeshProUGUI tmp;
-    [SerializeField]private Button btnAppleAutoLogin;
+    [SerializeField] private TextMeshProUGUI tmp;
+    [SerializeField] private Button btnAppleAutoLogin;
 
 #if UNITY_IOS
     IAppleAuthManager m_AppleAuthManager;
@@ -74,50 +74,50 @@ public class GooglePlayGameControl : MonoBehaviour
     public void LoginGooglePlayGames()
     {
 #if UNITY_ANDROID
-        //Social.localUser.Authenticate(success =>
-        //{
-        //    Log("Google v10.14");
-        //    Log("Result login: " + success);
-        //    if (success)
-        //    {
-        //        //Call Unity Authentication SDK to sign in or link with Google.
-        //        Log("PlayGamesPlatform: " + PlayGamesPlatform.Instance.IsAuthenticated());
-        //        Log("PlayGamesPlatform: " + PlayGamesPlatform.Instance.GetUserDisplayName());
-        //        Log("PlayGamesPlatform: " + PlayGamesPlatform.Instance.GetUserId());
-        //        Token = ((PlayGamesLocalUser)Social.localUser).GetIdToken();
-        //        Log("Login with Google done. IdToken: " + ((PlayGamesLocalUser)Social.localUser).GetIdToken());
-        //        string authCode = PlayGamesPlatform.Instance.GetServerAuthCode();
-        //        Log("Auth code: " + authCode);
-        //    }
-        //    else
-        //    {
-        //        Log("Unsuccessful login");
-        //    }
-        //});
-
-        PlayGamesPlatform.Instance.Authenticate((success) =>
+        Social.localUser.Authenticate(success =>
+        {
+            Log("Google v10.14");
+            Log("Result login: " + success);
+            if (success)
             {
-                Log("Google v11.01");
-                Log("SignInStatus: " + success);
-                Log("GetUserDisplayName: " + PlayGamesPlatform.Instance.GetUserDisplayName());
-                Log("GetUserId: " + PlayGamesPlatform.Instance.GetUserId());
-                if (success == SignInStatus.Success)
-                {
-                    Log("Login with Google Play games successful.");
-                    
-                    PlayGamesPlatform.Instance.RequestServerSideAccess(true, code =>
-                    {
-                        Token = code;
-                        Log("Token: " + Token);
-                        // This token serves as an example to be used for SignInWithGooglePlayGames
-                    });
-                }
-                else
-                {
-                    LogError("Failed to retrieve Google play games authorization code");
-                    Log("Login Unsuccessful");
-                }
-            });
+                //Call Unity Authentication SDK to sign in or link with Google.
+                Log("PlayGamesPlatform: " + PlayGamesPlatform.Instance.IsAuthenticated());
+                Log("PlayGamesPlatform: " + PlayGamesPlatform.Instance.GetUserDisplayName());
+                Log("PlayGamesPlatform: " + PlayGamesPlatform.Instance.GetUserId());
+                Token = ((PlayGamesLocalUser)Social.localUser).GetIdToken();
+                Log("Login with Google done. IdToken: " + ((PlayGamesLocalUser)Social.localUser).GetIdToken());
+                string authCode = PlayGamesPlatform.Instance.GetServerAuthCode();
+                Log("Auth code: " + authCode);
+            }
+            else
+            {
+                Log("Unsuccessful login");
+            }
+        });
+
+        //PlayGamesPlatform.Instance.Authenticate((success) =>
+        //    {
+        //        Log("Google v11.01");
+        //        Log("SignInStatus: " + success);
+        //        Log("GetUserDisplayName: " + PlayGamesPlatform.Instance.GetUserDisplayName());
+        //        Log("GetUserId: " + PlayGamesPlatform.Instance.GetUserId());
+        //        if (success == SignInStatus.Success)
+        //        {
+        //            Log("Login with Google Play games successful.");
+
+        //            PlayGamesPlatform.Instance.RequestServerSideAccess(true, code =>
+        //            {
+        //                Token = code;
+        //                Log("Token: " + Token);
+        //                // This token serves as an example to be used for SignInWithGooglePlayGames
+        //            });
+        //        }
+        //        else
+        //        {
+        //            LogError("Failed to retrieve Google play games authorization code");
+        //            Log("Login Unsuccessful");
+        //        }
+        //    });
 
 #endif
 
@@ -138,14 +138,16 @@ public class GooglePlayGameControl : MonoBehaviour
                 var appleIdCredential = credential as IAppleIDCredential;
                 if (appleIdCredential != null)
                 {
-                    var idToken = Encoding.UTF8.GetString(appleIdCredential.IdentityToken, 0, appleIdCredential.IdentityToken.Length);
+                    var idToken =
+ Encoding.UTF8.GetString(appleIdCredential.IdentityToken, 0, appleIdCredential.IdentityToken.Length);
                     Token = idToken;
 
                     Log("Sign-in with Apple successfully done. IdentityToken: " + Token);
 
                     if (appleIdCredential.AuthorizationCode != null)
                     {
-                        var authorizationCode = Encoding.UTF8.GetString(appleIdCredential.AuthorizationCode, 0, appleIdCredential.AuthorizationCode.Length);
+                        var authorizationCode =
+ Encoding.UTF8.GetString(appleIdCredential.AuthorizationCode, 0, appleIdCredential.AuthorizationCode.Length);
                         Log("Sign-in with Apple successfully done. authorizationCode: " + authorizationCode);
                     }
                 }
@@ -185,7 +187,8 @@ public class GooglePlayGameControl : MonoBehaviour
                 var appleIDCredential = credential as IAppleIDCredential;
                 if (appleIDCredential != null)
                 {
-                    var idToken = Encoding.UTF8.GetString(appleIDCredential.IdentityToken, 0, appleIDCredential.IdentityToken.Length);
+                    var idToken =
+ Encoding.UTF8.GetString(appleIDCredential.IdentityToken, 0, appleIDCredential.IdentityToken.Length);
                     Log("Sign-in with Apple successfully done. IDToken: " + idToken);
                     Token = idToken;
                 }
@@ -209,15 +212,15 @@ public class GooglePlayGameControl : MonoBehaviour
     public void TryGetToken()
     {
 #if UNITY_ANDROID
-        //Log("Try get token...");
-        
-        //PlayGamesPlatform.Instance.RequestServerSideAccess(true, code =>
-        //{
-        //    Log("Authorization code: " + code);
-        //    Token = code;
-        //    Log("Token: " + Token);
-        //    // This token serves as an example to be used for SignInWithGooglePlayGames
-        //});
+//        Log("Try get token...");
+
+//        PlayGamesPlatform.Instance.RequestServerSideAccess(true, code =>
+//        {
+//            Log("Authorization code: " + code);
+//            Token = code;
+//            Log("Token: " + Token);
+//            // This token serves as an example to be used for SignInWithGooglePlayGames
+//        });
 #endif
     }
 
@@ -229,11 +232,13 @@ public class GooglePlayGameControl : MonoBehaviour
 
     public void Log(string message)
     {
+        Debug.Log(message);
         tmp.text += "\n" + message;
     }
 
     public void LogError(string message)
     {
+        Debug.Log(message);
         tmp.text += "\n<color=red>" + message + "</color>";
     }
 

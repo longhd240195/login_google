@@ -486,7 +486,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 246523395}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b25b62becc710d499bb8d66037861fc, type: 3}
+  m_Script: {fileID: 11500000, guid: 771275b7caa05394a988b6a5f2d673d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   tmp: {fileID: 85376757}
@@ -1293,7 +1293,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1183618490
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1361,7 +1361,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 246523396}
         m_TargetAssemblyTypeName: GooglePlayGameControl, Assembly-CSharp
-        m_MethodName: TrySomething
+        m_MethodName: TryGetToken
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1427,7 +1427,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1206179705
 RectTransform:
   m_ObjectHideFlags: 0

@@ -50,30 +50,30 @@ public class GameSignInService
 #if UNITY_ANDROID
         CheckNull(callback);
 
-        PlayGamesPlatform.Instance.Authenticate((success) =>
-            {
-                Log("Google v11.01");
-                Log("SignInStatus: " + success);
-                Log("GetUserDisplayName: " + PlayGamesPlatform.Instance.GetUserDisplayName());
-                Log("GetUserId: " + PlayGamesPlatform.Instance.GetUserId());
-                if (success == SignInStatus.Success)
-                {
-                    Log("Login with Google Play games successful.");
+        //PlayGamesPlatform.Instance.Authenticate((success) =>
+        //    {
+        //        Log("Google v11.01");
+        //        Log("SignInStatus: " + success);
+        //        Log("GetUserDisplayName: " + PlayGamesPlatform.Instance.GetUserDisplayName());
+        //        Log("GetUserId: " + PlayGamesPlatform.Instance.GetUserId());
+        //        if (success == SignInStatus.Success)
+        //        {
+        //            Log("Login with Google Play games successful.");
                     
-                    PlayGamesPlatform.Instance.RequestServerSideAccess(true, code =>
-                    {
-                        Token = code;
-                        Log("Token: " + Token);
-                        callback?.Invoke(Token);
-                        // This token serves as an example to be used for SignInWithGooglePlayGames
-                    });
-                }
-                else
-                {
-                    LogError("Failed to retrieve Google play games authorization code");
-                    Log("Login Unsuccessful");
-                }
-            });
+        //            PlayGamesPlatform.Instance.RequestServerSideAccess(true, code =>
+        //            {
+        //                Token = code;
+        //                Log("Token: " + Token);
+        //                callback?.Invoke(Token);
+        //                // This token serves as an example to be used for SignInWithGooglePlayGames
+        //            });
+        //        }
+        //        else
+        //        {
+        //            LogError("Failed to retrieve Google play games authorization code");
+        //            Log("Login Unsuccessful");
+        //        }
+        //    });
 
 #endif
     }
