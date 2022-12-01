@@ -128,30 +128,6 @@ public class GooglePlayGameControl : MonoBehaviour
 
 #endif
 
-        IEnumerator GetAccessToken(string your_webClientId,string your_clientsecret, string your_authcode)
-        {
-            WWWForm form = new WWWForm();
-            form.AddField("client_id", your_webClientId);
-            form.AddField("client_secret", your_clientsecret);
-            form.AddField("code", your_authcode);
-            UnityWebRequest www = UnityWebRequest.Post("https://www.googleapis.com/oauth2/v4/token", form);
-            yield return www.SendWebRequest();
-
-            if (www.isNetworkError || www.isHttpError)
-            {
-            }
-            else
-            {
-
-                //Access token response
-                Log(www.downloadHandler.text);
-                GoogleData googleData = JsonUtility.FromJson<GoogleData>(www.downloadHandler.text);
-                LogError(googleData.access_token);
-
-            }
-        }
-
-
 #if UNITY_IOS
         // Initialize the Apple Auth Manager
         Log("normal login apple");
@@ -201,7 +177,28 @@ public class GooglePlayGameControl : MonoBehaviour
 #endif
 
     }
+    IEnumerator GetAccessToken(string your_webClientId, string your_clientsecret, string your_authcode)
+    {
+        WWWForm form = new WWWForm();
+        form.AddField("client_id", your_webClientId);
+        form.AddField("client_secret", your_clientsecret);
+        form.AddField("code", your_authcode);
+        UnityWebRequest www = UnityWebRequest.Post("https://www.googleapis.com/oauth2/v4/token", form);
+        yield return www.SendWebRequest();
 
+        if (www.isNetworkError || www.isHttpError)
+        {
+        }
+        else
+        {
+
+            //Access token response
+            Log(www.downloadHandler.text);
+            GoogleData googleData = JsonUtility.FromJson<GoogleData>(www.downloadHandler.text);
+            LogError(googleData.access_token);
+
+        }
+    }
     private void ApplePlayLogin()
     {
 #if UNITY_IOS
