@@ -15,17 +15,22 @@ using System.Text;
 
 #endif
 
+using System.Collections;
 using System.Threading.Tasks;
 using TMPro;
 
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 
 public class GooglePlayGameControl : MonoBehaviour
 {
     private string Token;
     [SerializeField] private TextMeshProUGUI tmp;
     [SerializeField] private Button btnAppleAutoLogin;
+
+    private string clientID;
+    private string secretID;
 
 #if UNITY_IOS
     IAppleAuthManager m_AppleAuthManager;
@@ -57,7 +62,7 @@ public class GooglePlayGameControl : MonoBehaviour
         //var config = new PlayGamesClientConfiguration.Builder()
         //    .RequestServerAuthCode(true)
         //    .RequestIdToken()
-            
+
         //    .Build();
 
         //PlayGamesPlatform.InitializeInstance(config);
@@ -106,10 +111,11 @@ public class GooglePlayGameControl : MonoBehaviour
                 {
                     Log("Login with Google Play games successful.");
                     Log("ID user: " +PlayGamesPlatform.Instance.localUser.id);
-                    PlayGamesPlatform.Instance.RequestServerSideAccess(true, code =>
+                    PlayGamesPlatform.Instance.RequestServerSideAccess(false, code =>
                     {
                         Token = code;
                         Log("Token: " + Token);
+                        StartCoroutine(GetAccessToken(clientID,secretID,  Token));
                         // This token serves as an example to be used for SignInWithGooglePlayGames
                     });
                 }
@@ -121,6 +127,30 @@ public class GooglePlayGameControl : MonoBehaviour
             });
 
 #endif
+
+        IEnumerator GetAccessToken(string your_webClientId,string your_clientsecret, string your_authcode)
+        {
+            WWWForm form = new WWWForm();
+            form.AddField("client_id", your_webClientId);
+            form.AddField("client_secret", your_clientsecret);
+            form.AddField("code", your_authcode);
+            UnityWebRequest www = UnityWebRequest.Post("https://www.googleapis.com/oauth2/v4/token", form);
+            yield return www.SendWebRequest();
+
+            if (www.isNetworkError || www.isHttpError)
+            {
+            }
+            else
+            {
+
+                //Access token response
+                Log(www.downloadHandler.text);
+                GoogleData googleData = JsonUtility.FromJson<GoogleData>(www.downloadHandler.text);
+                LogError(googleData.access_token);
+
+            }
+        }
+
 
 #if UNITY_IOS
         // Initialize the Apple Auth Manager
@@ -252,4 +282,13 @@ public class GooglePlayGameControl : MonoBehaviour
     {
         Log("Token: " + Token);
     }
+}
+
+[System.Serializable]
+public class GoogleData
+{
+    public string access_token;
+    public string token_type;
+    public int expires_in;
+    public string refresh_token;
 }
